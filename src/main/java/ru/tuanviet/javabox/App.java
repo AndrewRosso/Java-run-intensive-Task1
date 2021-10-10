@@ -7,10 +7,9 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
+
 
 public class App {
     public static void main(String[] args) throws IOException {
@@ -26,9 +25,6 @@ public class App {
         FirstNameLibrary firstNameLibrary = objectMapper.readValue(responseBodyNamesApi.string(), FirstNameLibrary.class);
         List<String> secondNameLibrary = objectMapper.readValue(responseBodyNounseApi.string(),
                 new TypeReference<List<String>>() {});
-
-//        System.out.println(firstNameLibrary.getNames());
-//        System.out.println(secondNameLibrary);
 
 
         SecondNameLibrary listSecondName = new SecondNameLibrary();

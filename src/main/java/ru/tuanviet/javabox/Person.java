@@ -1,5 +1,7 @@
 package ru.tuanviet.javabox;
 
+import static org.apache.commons.lang3.text.WordUtils.*;
+
 public class Person {
     private String firstName;
     private String secondName;
@@ -10,15 +12,7 @@ public class Person {
         this.secondName = secondName;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
     public void getInfo () {
-        System.out.println(firstName+" "+secondName);
+        System.out.println(capitalizeFully(firstName)+" "+ capitalizeFully(secondName));
     }
 }
