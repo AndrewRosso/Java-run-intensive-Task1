@@ -12,10 +12,14 @@ public class NamesService {
     }
 
     public Person getRandomPerson() {
-        return new Person(getRandomName(firstNameLibrary.getNames()), getRandomName(secondNameLibrary.getSecondNames()));
+        return new Person(getRandomName(firstNameLibrary.getNames()),
+                getRandomName(secondNameLibrary.getNames()));
     }
 
     private String getRandomName(List<String> names) {
         return names.get((int) (Math.random() * names.size()));
     }
+
+
+
 }

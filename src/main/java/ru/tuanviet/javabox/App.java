@@ -7,25 +7,38 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        Request requestNamesApi = new Request.Builder().url("https://api.npoint.io/f744aa71f0b7c142f0fd").build();
-        Request requestNounsApi = new Request.Builder().url("https://api.npoint.io/a742b65192a1e1e22858").build();
-
+        Request requestNamesApi = new Request.Builder().url(FirstNameLibrary.getUrlNamesApi()).build();
+        Request requestNounsApi = new Request.Builder().url(SecondNameLibrary.getUrlNounceApi()).build();
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(30, TimeUnit.SECONDS);
-        ObjectMapper objectMapper = new ObjectMapper();
 
         ResponseBody responseBodyNamesApi = client.newCall(requestNamesApi).execute().body();
         ResponseBody responseBodyNounseApi = client.newCall(requestNounsApi).execute().body();
 
+        ObjectMapper objectMapper = new ObjectMapper();
         FirstNameLibrary firstNameLibrary = objectMapper.readValue(responseBodyNamesApi.string(), FirstNameLibrary.class);
-
         List<String> secondNameLibrary = objectMapper.readValue(responseBodyNounseApi.string(),
                 new TypeReference<List<String>>() {});
-        System.out.println(secondNameLibrary);
+
+//        System.out.println(firstNameLibrary.getNames());
+//        System.out.println(secondNameLibrary);
+
+
+        SecondNameLibrary listSecondName = new SecondNameLibrary();
+        listSecondName.setSecondNames(secondNameLibrary);
+
+        NamesService namesService = new NamesService(firstNameLibrary,listSecondName);
+
+        for (int i=0;i<3;i++) {
+            namesService.getRandomPerson().getInfo();
+        }
+
     }
 }

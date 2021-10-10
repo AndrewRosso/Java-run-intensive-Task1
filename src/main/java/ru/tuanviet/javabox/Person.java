@@ -17,4 +17,8 @@ public class Person {
     public String getSecondName() {
         return secondName;
     }
+
+    public void getInfo () {
+        System.out.println(firstName+" "+secondName);
+    }
 }
